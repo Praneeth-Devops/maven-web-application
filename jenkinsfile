@@ -1,0 +1,13 @@
+pipeline {
+    agent any
+    stages{
+        stage('checkout'){
+            steps{
+               git credentialsId: 'praneegit', url: 'https://github.com/Praneeth-Devops/maven-web-application.git'
+                }
+        stage('build'){
+            steps{
+               sh "mvn clean package"
+                }
+            }
+        }
