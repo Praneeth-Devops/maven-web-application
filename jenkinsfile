@@ -1,13 +1,18 @@
 pipeline {
     agent any
+    environment{
+        PATH = "/opt/apache-maven-3.8.1/bin:$PATH"
+    }
     stages{
         stage('checkout'){
             steps{
                git credentialsId: 'praneegit', url: 'https://github.com/Praneeth-Devops/maven-web-application.git'
-                }
+            }
+        }
         stage('build'){
             steps{
                sh "mvn clean package"
-                }
             }
         }
+    }
+}
