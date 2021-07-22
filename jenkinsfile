@@ -2,7 +2,7 @@ pipeline {
     agent any
     tools {
         maven 'maven3.6.1'
-   }
+    }
 
     stages{
         stage('checkout'){
@@ -14,12 +14,12 @@ pipeline {
             steps{
                sh "mvn clean package"
             }
+        }
         stage('DeployAppIntoTomcat') {
            steps{
              sshagent(['tomcat-deploy']) {
                    sh " scp -o hostkeychecking=no target/*.war ec2-user@172.31.33.8:/opt/tomcat8/webapps/"
-             }
-              }
+                }
             }
         }
     }
